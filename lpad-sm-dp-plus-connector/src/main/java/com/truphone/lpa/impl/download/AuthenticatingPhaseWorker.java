@@ -177,7 +177,8 @@ public class AuthenticatingPhaseWorker {
     private void setServerCertificate(InitialAuthenticationKeys initialAuthenticationKeys, InitiateAuthenticationResp initiateAuthenticationResp) {
 
         initialAuthenticationKeys.setServerCertificate(initiateAuthenticationResp.getServerCertificate());
-        initialAuthenticationKeys.setServerCertificate(Util.byteArrayToHexString(Base64.decodeBase64(initialAuthenticationKeys.getServerCertificate()), ""));
+        initialAuthenticationKeys
+	        .setServerCertificate(Util.byteArrayToHexString(Base64.decodeBase64(initialAuthenticationKeys.getServerCertificate()), ""));
 
         if (LogStub.getInstance().isDebugEnabled()) {
             LogStub.getInstance().logDebug(LOG, LogStub.getInstance().getTag() + " - serverCertificate: " + initialAuthenticationKeys.getServerCertificate());
@@ -273,7 +274,8 @@ public class AuthenticatingPhaseWorker {
 
         progress.stepExecuted(DOWNLOAD_PROFILE_AUTHENTICATE_WITH_EUICC, "authenticateWithEuicc retrieving...");
 
-        String authenticateServerResponse = apduTransmitter.transmitApdus(ApduUtils.authenticateServerApdu(initialAuthenticationKeys.getServerSigned1(),
+        String authenticateServerResponse = apduTransmitter
+	        .transmitApdus(ApduUtils.authenticateServerApdu(initialAuthenticationKeys.getServerSigned1(),
                 initialAuthenticationKeys.getServerSignature1(),
                 initialAuthenticationKeys.getEuiccCiPKIdTobeUsed(), initialAuthenticationKeys.getServerCertificate(),
                 initialAuthenticationKeys.getMatchingId()));
